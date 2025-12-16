@@ -7,7 +7,9 @@
   --muted: #6b7280;
   --surface: #ffffff;
   --background: #f9fafb;
-  --border: #e5e7eb;
+
+  /* New shared border color token to standardize borders */
+  --border-color: #EF4444;
 
   --radius: 12px;
   --shadow: 0 8px 24px rgba(0,0,0,0.06);
@@ -18,7 +20,8 @@
   --muted: #9ca3af;
   --surface: #18181b;
   --background: #0b0f14;
-  --border: #27272a;
+  /* Keep red borders consistent in dark mode as requested */
+  --border-color: #EF4444;
 }
 
 /* Base layout */
@@ -43,7 +46,7 @@ a { color: var(--primary); }
 /* Header */
 .app-header {
   background: linear-gradient(180deg, rgba(59,130,246,0.10), rgba(249,250,251,0.2));
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .header-bar {
@@ -72,7 +75,7 @@ a { color: var(--primary); }
 
 .card {
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 16px;
@@ -123,7 +126,7 @@ a { color: var(--primary); }
 .btn-secondary {
   background: transparent;
   color: var(--text);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
 }
 
 .btn-danger {
@@ -139,7 +142,7 @@ a { color: var(--primary); }
 /* Theme toggle */
 .theme-toggle {
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
   color: var(--text);
   border-radius: 999px;
   padding: 8px 12px;
@@ -166,7 +169,7 @@ a { color: var(--primary); }
 
 .input, .textarea, .select {
   width: 100%;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
   background: var(--surface);
   color: var(--text);
   border-radius: 10px;
@@ -191,7 +194,7 @@ a { color: var(--primary); }
   grid-template-columns: 1fr auto;
   gap: 12px;
   padding: 12px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   background: var(--surface);
 }
@@ -228,7 +231,7 @@ a { color: var(--primary); }
   border-radius: 999px;
   font-size: 12px;
   font-weight: 700;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
   background: rgba(0,0,0,0.02);
 }
 
@@ -246,7 +249,7 @@ a { color: var(--primary); }
 
 /* Alerts */
 .alert {
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 12px;
   margin-bottom: 12px;
@@ -260,7 +263,7 @@ a { color: var(--primary); }
 
 /* Footer */
 .app-footer {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--border-color);
   padding: 16px 0 32px;
 }
 

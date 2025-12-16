@@ -1,0 +1,22 @@
+{
+  "name": "to_do_backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Backend for simple to-do list app with Express and SQLite.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "prepare": "node -e \"try{require('fs').mkdirSync('data',{recursive:true})}catch(e){}\""
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "morgan": "^1.10.0",
+    "sqlite3": "^5.1.7"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

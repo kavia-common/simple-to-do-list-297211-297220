@@ -1,12 +1,22 @@
 //
+//
 // Simple API client for tasks
 //
-// Base URL comes from environment variable; ensure no trailing slash.
-const BASE_URL = String(process.env.REACT_APP_API_BASE || '').replace(/\/*$/, '');
+// Base URL must be provided by env: REACT_APP_API_BASE. No hardcoded fallbacks.
+// We also ensure no trailing slash to avoid double slashes in paths.
+const RAW_BASE = process.env.REACT_APP_API_BASE ? String(process.env.REACT_APP_API_BASE) : '';
+const BASE_URL = RAW_BASE.replace(/\/*$/, '');
 
+/**
+ * Get the configured API base URL or throw a user-friendly error.
+ * Ensures we never proceed with an undefined base which would cause confusing network errors.
+ */
 function ensureBase() {
   if (!BASE_URL) {
-    throw new Error('API base URL is not configured. Set REACT_APP_API_BASE in the frontend .env file.');
+    // Provide a friendly, actionable message
+    throw new Error(
+      'API base URL is not configured. Please set REACT_APP_API_BASE in to_do_frontend/.env (e.g., REACT_APP_API_BASE=http://localhost:4000/api) and restart the dev server.'
+    );
   }
   return BASE_URL;
 }

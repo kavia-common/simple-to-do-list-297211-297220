@@ -134,7 +134,7 @@ function App() {
       <footer className="app-footer" role="contentinfo">
         <div className="container">
           <small className="muted">
-            API base: {process.env.REACT_APP_API_BASE || 'http://localhost:4000/api'}
+            API base: {process.env.REACT_APP_API_BASE || 'not set'}
           </small>
         </div>
       </footer>

@@ -1,8 +1,15 @@
 //
 // Simple API client for tasks
 //
-const DEFAULT_BASE = 'http://localhost:4000/api';
-const BASE_URL = (process.env.REACT_APP_API_BASE || DEFAULT_BASE).replace(/\/+$/, '');
+// Base URL comes from environment variable; ensure no trailing slash.
+const BASE_URL = String(process.env.REACT_APP_API_BASE || '').replace(/\/*$/, '');
+
+function ensureBase() {
+  if (!BASE_URL) {
+    throw new Error('API base URL is not configured. Set REACT_APP_API_BASE in the frontend .env file.');
+  }
+  return BASE_URL;
+}
 
 async function handleResponse(res) {
   if (!res.ok) {
@@ -28,7 +35,7 @@ export async function listTasks() {
    * List tasks.
    * @returns {Promise<Array>} List of task objects.
    */
-  const res = await fetch(`${BASE_URL}/tasks`, { headers: { 'Accept': 'application/json' } });
+  const res = await fetch(`${ensureBase()}/tasks`, { headers: { Accept: 'application/json' } });
   return handleResponse(res);
 }
 
@@ -39,9 +46,9 @@ export async function createTask(task) {
    * @param {{title:string,description:string,status:'pending'|'completed'}} task
    * @returns {Promise<Object>} Created task
    */
-  const res = await fetch(`${BASE_URL}/tasks`, {
+  const res = await fetch(`${ensureBase()}/tasks`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
     body: JSON.stringify(task),
   });
   return handleResponse(res);
@@ -55,9 +62,9 @@ export async function updateTask(id, updates) {
    * @param {{title?:string,description?:string,status?:'pending'|'completed'}} updates
    * @returns {Promise<Object>} Updated task
    */
-  const res = await fetch(`${BASE_URL}/tasks/${id}`, {
+  const res = await fetch(`${ensureBase()}/tasks/${id}`, {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
     body: JSON.stringify(updates),
   });
   return handleResponse(res);
@@ -70,7 +77,7 @@ export async function deleteTask(id) {
    * @param {number|string} id
    * @returns {Promise<null>} Nothing
    */
-  const res = await fetch(`${BASE_URL}/tasks/${id}`, { method: 'DELETE' });
+  const res = await fetch(`${ensureBase()}/tasks/${id}`, { method: 'DELETE' });
   return handleResponse(res);
 }
 
